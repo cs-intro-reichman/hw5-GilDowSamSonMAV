@@ -6,7 +6,7 @@ public class Wordle {
     // Reads all words from dictionary filename into a String array.
     public static String[] readDictionary(String filename) {
         In in = new In(filename);
-        String [] f = in.readAllStrings();
+        String[] f = in.readAllStrings();
         return f;
     }
 
@@ -34,17 +34,18 @@ public class Wordle {
     // G for exact match, Y if letter appears anywhere else, _ otherwise.
     public static void computeFeedback(String secret, String guess, char[] resultRow) {
         for (int i = 0; i < secret.length(); i++) {
-            for (int j = 0; j < guess.length(); j++) {
-                char t = guess.charAt(j);
-                if (guess.charAt(i) == secret.charAt(i)) {
-                    resultRow[i] = 'G';
-                } else if (containsChar(secret, t)) {
-                    resultRow[i] = 'Y';
-                } else {
-                    resultRow[i] = '_';
-                }
+
+            char t = guess.charAt(i);
+            if (guess.charAt(i) == secret.charAt(i)) {
+                resultRow[i] = 'G';
+            } else if (containsChar(secret, t)) {
+                resultRow[i] = 'Y';
+            } else {
+                resultRow[i] = '_';
             }
-        }for(int i = 0 ; i < resultRow.length; i++){
+
+        }
+        for (int i = 0; i < resultRow.length; i++) {
             System.out.print(resultRow[i]);
         }
     }
@@ -58,11 +59,12 @@ public class Wordle {
     // guesses[2][3] // 'L'
     // guesses[2][4] // 'O'
     public static void storeGuess(String guess, char[][] guesses, int row) {
-        for(int i = 0; i < guesses[i].length; i++){
-            for(int j = 0; j < guesses[j].length; j++){
-                    guesses[i][j] = guess.charAt(j);
+        for (int i = 0; i < guesses.length; i++) {
+            for (int j = 0; j < guesses[j].length; j++) {
+                guesses[row][j] = guess.charAt(j);
             }
-        }for(int i = 0; i < guesses.length; i++){
+        }
+        for (int i = 0; i < guesses.length; i++) {
             System.out.println(guesses[i]);
         }
     }
@@ -86,14 +88,15 @@ public class Wordle {
 
     // Returns true if all entries in resultRow are 'G'.
     public static boolean isAllGreen(char[] resultRow) {
-       int count = 0;
-        for(int i= 0; i < resultRow.length ; i++){
-        if(resultRow[i] == 'G'){
-            count++;
+        int count = 0;
+        for (int i = 0; i < resultRow.length; i++) {
+            if (resultRow[i] == 'G') {
+                count++;
+            }
         }
-       }if(resultRow.length == count){
-        return true;
-       }
+        if (resultRow.length == count) {
+            return true;
+        }
         return false;
     }
 
@@ -109,12 +112,11 @@ public class Wordle {
         String secret = chooseSecretWord(dict);
 
         // Prepare 2D arrays for guesses and results
-        char[][] guesses = new char[6][5]; 
-                
-                char[][] results = new char[6][5];
-            
-                
-                In inp = new In();
+        char[][] guesses = new char[6][5];
+
+        char[][] results = new char[6][5];
+
+        In inp = new In();
 
         int attempt = 0;
         boolean won = false;
@@ -129,8 +131,6 @@ public class Wordle {
                 System.out.print("Enter your guess (5-letter word): ");
                 guess = inp.readLine();
 
-                        
-                
                 if (guess.length() > WORD_LENGTH) {
                     System.out.println("Invalid word. Please try again.");
                 } else {
