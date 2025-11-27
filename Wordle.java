@@ -45,9 +45,7 @@ public class Wordle {
             }
 
         }
-        for (int i = 0; i < resultRow.length; i++) {
-            System.out.print(resultRow[i]);
-        }
+
     }
 
     // Store guess string (chars) into the given row of guesses 2D array.
@@ -64,9 +62,7 @@ public class Wordle {
                 guesses[row][j] = guess.charAt(j);
             }
         }
-        for (int i = 0; i < guesses.length; i++) {
-            System.out.println(guesses[i]);
-        }
+
     }
 
     // Prints the game board up to currentRow (inclusive).
@@ -131,7 +127,7 @@ public class Wordle {
                 System.out.print("Enter your guess (5-letter word): ");
                 guess = inp.readLine();
 
-                if (guess.length() > WORD_LENGTH) {
+                if (guess.length() > 5) {
                     System.out.println("Invalid word. Please try again.");
                 } else {
                     valid = true;
@@ -153,7 +149,8 @@ public class Wordle {
         }
 
         if (!won) {
-            // ... follow the assignment examples for how the printing should look like
+           System.out.println("Sorry, you did not guess the word.");
+           System.out.println("The secret word was: " + secret);
         }
 
         inp.close();
